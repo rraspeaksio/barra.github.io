@@ -1,0 +1,539 @@
+/* ==========================================
+   RESET & VARIABLES
+   ========================================== */
+:root {
+    --bg-color: #f7eef0;             /* Warna latar pastel pink lembut */
+    --card-bg: #fffbf9;             /* Warna dasar area konten */
+    --text-dark: #2c2c2c;           /* Warna teks utama */
+    --pink-accent: #e07a93;         /* Warna judul pink aesthetic */
+    --green-badge: #d4e8c7;         /* Warna hijau pastel untuk badge tahun */
+    --border-color: #333333;        /* Warna garis tepi elemen */
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--text-dark);
+}
+:root {
+    --accent-color: #97DDE9;
+    --border-color: #333333;
+    --text-dark: #2c2c2c;
+}
+
+/* Container Header & Banner */
+.top-banner {
+    width: 100%;
+    background-color: var(--accent-color); 
+    position: relative;
+    border-bottom: 2px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Pola Kotak-kotak (Checkered Strip) di Atas */
+.checkered-strip {
+    width: 100%;
+    height: 30px;
+    background-image: 
+        linear-gradient(45deg, #a3c98a 25%, transparent 25%), 
+        linear-gradient(-45deg, #a3c98a 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #a3c98a 75%), 
+        linear-gradient(-45deg, transparent 75%, #a3c98a 75%);
+    background-size: 30px 30px;
+    background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
+    background-color: #ffffff;
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* Styling Menu Navbar Ala Scrapbook */
+.scrapbook-nav {
+    display: flex;
+    gap: 15px;
+    padding: 12px 0;
+}
+
+.nav-pill {
+    background-color: #ffffff;
+    border: 2px solid var(--border-color);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--text-dark);
+    box-shadow: 2px 2px 0px var(--border-color);
+    transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+.nav-pill:hover, .nav-pill.active {
+    background-color: #faedcd;
+    transform: translateY(-2px);
+}
+
+/* Responsif untuk Layar Kecil */
+@media (max-width: 768px) {
+    .scrapbook-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px;
+    }
+}
+
+body {
+    background-color: var(--bg-color);
+    padding: 0 0 60px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ==========================================
+   TOP BANNER & CHECKERED STRIP
+   ========================================== */
+.top-banner {
+    width: 100%;
+    height: 70px;
+    background-color: #e8a5b8; /* Background pink banner */
+    position: relative;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.checkered-strip {
+    width: 100%;
+    height: 30px;
+    background-image: 
+        linear-gradient(45deg, #a3c98a 25%, transparent 25%), 
+        linear-gradient(-45deg, #a3c98a 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #a3c98a 75%), 
+        linear-gradient(-45deg, transparent 75%, #a3c98a 75%);
+    background-size: 30px 30px;
+    background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
+    background-color: #ffffff;
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* ==========================================
+   PORTFOLIO CONTAINER
+   ========================================== */
+.portfolio-container {
+    max-width: 950px;
+    width: 90%;
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    margin-top: 30px;
+    padding: 40px;
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================
+   HEADER SECTION (POLAROID & HELLO)
+   ========================================== */
+.header-section {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+/* Polaroid Photo Frame */
+.polaroid-wrapper {
+    position: relative;
+}
+
+.paperclip {
+    position: absolute;
+    top: -25px;
+    left: 30px;
+    width: 25px;
+    height: 50px;
+    border: 3px solid #777;
+    border-radius: 15px;
+    z-index: 5;
+    background: transparent;
+    transform: rotate(-15deg);
+}
+
+.polaroid {
+    background: white;
+    padding: 12px 12px 35px 12px;
+    border: 2px solid var(--border-color);
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+    transform: rotate(-3deg);
+    width: 220px;
+    
+}
+
+.polaroid img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+}
+
+/* Intro Text */
+.header-intro {
+    flex: 1;
+    position: relative;
+}
+
+.hello-badge {
+    position: absolute;
+    top: -15px;
+    left: 80px;
+    background: #faedcd;
+    border: 1.5px solid var(--border-color);
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    transform: rotate(10deg);
+}
+
+.hello-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 5rem;
+    color: var(--pink-accent);
+    line-height: 0.9;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(224, 122, 147, 0.2);
+}
+
+.name-subtitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+
+.bio-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.header-contacts {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.contact-pill {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #555;
+}
+
+/* ==========================================
+   CONTENT GRID & SEPARATORS
+   ========================================== */
+.divider-line {
+    width: 100%;
+    height: 2px;
+    border-bottom: 2px dashed #ccc;
+    margin: 35px 0;
+}
+
+.content-grid {
+    display: flex;
+    gap: 40px;
+}
+
+.col-left, .col-right {
+    flex: 1;
+}
+
+.col-divider {
+    width: 2px;
+    background-color: #ddd;
+}
+
+/* ==========================================
+   SECTIONS & TYPOGRAPHY
+   ========================================== */
+.section-block {
+    margin-bottom: 30px;
+}
+
+.section-block:last-child {
+    margin-bottom: 0;
+}
+
+.section-heading {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--pink-accent);
+    margin-bottom: 15px;
+    text-transform: capitalize;
+}
+
+/* Education & Experience Items */
+.edu-item, .exp-item {
+    margin-bottom: 20px;
+}
+
+.edu-item h4, .exp-item h4 {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.edu-item p, .exp-item p {
+    font-size: 0.88rem;
+    color: #555;
+    margin: 3px 0 8px 0;
+}
+
+/* Green Badge Tahun */
+.badge-green {
+    display: inline-block;
+    background-color: var(--green-badge);
+    border: 1.5px solid var(--border-color);
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    box-shadow: 2px 2px 0px var(--border-color);
+}
+
+/* Softwares Badges */
+.software-icons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.sw-badge {
+    width: 45px;
+    height: 45px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+    box-shadow: 2px 2px 0px var(--border-color);
+}
+
+.sw-badge.vs { background-color: #cce3de; }
+.sw-badge.html { background-color: #f7d6e0; }
+.sw-badge.css { background-color: #e2ece9; }
+.sw-badge.Canva { background-color: #faedcd; }
+
+/* Skills Outline Pills */
+.skills-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.pill-outline {
+    border: 1.5px solid var(--border-color);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    background: transparent;
+}
+
+/* Language Box */
+.lang-grid {
+    display: flex;
+    gap: 15px;
+}
+
+.lang-box {
+    font-size: 0.85rem;
+}
+
+.lang-box small {
+    color: #777;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+@media (max-width: 768px) {
+    .header-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .header-contacts {
+        justify-content: center;
+    }
+    .content-grid {
+        flex-direction: column;
+    }
+    .col-divider {
+        display: none;
+    }
+    .hello-badge {
+        left: 50%;
+        transform: translateX(-50%) rotate(0deg);
+        top: -25px;
+    }
+}
+/* Cari class .polaroid yang udah ada, lalu tambahin transition dan z-index */
+.polaroid {
+    background: white;
+    padding: 12px 12px 35px 12px;
+    border: 2px solid var(--border-color);
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+    transform: rotate(-3deg);
+    width: 220px;
+    
+    /* Tambahan baru: */
+    position: relative;
+    z-index: 1; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Bikin pergerakannya mulus */
+}
+
+/* Tambahin efek HOVER ini di bawahnya */
+.polaroid:hover {
+    transform: scale(1.4) rotate(0deg); /* Fotonya membesar 1.4x lipat dan posisinya jadi lurus */
+    box-shadow: 15px 15px 25px rgba(0,0,0,0.3); /* Bayangan makin tebal biar kelihatan melayang */
+    z-index: 999; /* Biar fotonya maju nutupin elemen lain (nggak ketindih) */
+    cursor: zoom-in; /* Ubah bentuk kursor jadi kaca pembesar */
+}
+/* ==========================================
+   FOOTER STYLING
+   ========================================== */
+.scrapbook-footer {
+    width: 100%;
+    margin-top: 50px;
+    background-color: var(--accent-color); /* Memakai warna #97DDE9 */
+    border-top: 2px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Pola kotak-kotak untuk membatasi footer */
+.checkered-strip-footer {
+    width: 100%;
+    height: 25px;
+    background-image: 
+        linear-gradient(45deg, #a3c98a 25%, transparent 25%), 
+        linear-gradient(-45deg, #a3c98a 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #a3c98a 75%), 
+        linear-gradient(-45deg, transparent 75%, #a3c98a 75%);
+    background-size: 25px 25px;
+    background-position: 0 0, 0 12.5px, 12.5px -12.5px, -12.5px 0px;
+    background-color: #ffffff;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.footer-content {
+    padding: 30px 20px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.footer-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+/* Memodifikasi tombol agar interaktif saat di-hover */
+.footer-links .pill-outline {
+    text-decoration: none;
+    color: var(--text-dark);
+    background-color: var(--card-bg);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.footer-links .pill-outline:hover {
+    background-color: #faedcd; /* Warna kuning pastel ala scrapbook */
+    transform: translateY(-4px);
+    box-shadow: 4px 4px 0px var(--border-color);
+}
+
+.copyright-text {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+html {
+    scroll-behavior: smooth;
+}
+/* ==========================================
+   EXPERIENCE PHOTO GALLERY (AESTHETIC)
+   ========================================== */
+.exp-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 2px dashed #ccc; /* Garis batas tipis di atas foto */
+}
+
+/* Kertas Polaroid Mini */
+.mini-polaroid {
+    position: relative;
+    background: #fff;
+    padding: 6px 6px 20px 6px; /* Bawahnya lebih lebar ala polaroid */
+    border: 1.5px solid var(--border-color);
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+    width: calc(33.333% - 10px); /* Dibagi 3 kolom biar rapi */
+    min-width: 100px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0s;
+    z-index: 1;
+}
+
+/* Atur ukuran fotonya biar kotak pas (Square) */
+.mini-polaroid img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border: 1px solid #ddd;
+}
+
+/* Selotip (Washi Tape) di atas foto */
+.washi-tape {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    width: 40px;
+    height: 15px;
+    background-color: var(--accent-color); /* Pake warna biru muda dari tema */
+    opacity: 0.8;
+    border: 1px dashed rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    
+}
+
+/* Bikin posisinya miring natural (berantakan estetik) */
+.mini-polaroid:nth-child(1) { transform: rotate(-4deg); }
+.mini-polaroid:nth-child(2) { transform: rotate(3deg); margin-top: 10px; }
+.mini-polaroid:nth-child(3) { transform: rotate(-2deg); }
+
+/* Efek pas disentuh mouse: Membesar, maju ke depan, posisinya lurus */
+.mini-polaroid:hover {
+    transform: scale(1.3) rotate(0deg);
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
