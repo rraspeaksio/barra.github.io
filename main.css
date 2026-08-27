@@ -7,9 +7,9 @@
     --text-dark: #2c2c2c;           /* Warna teks utama */
     --pink-accent: #e07a93;         /* Warna judul pink aesthetic */
     --green-badge: #d4e8c7;         /* Warna hijau pastel untuk badge tahun */
+    --accent-color: #FF9D9D;        /* Warna biru muda tema */
     --border-color: #333333;        /* Warna garis tepi elemen */
 }
-
 
 * {
     margin: 0;
@@ -18,13 +18,33 @@
     font-family: 'Plus Jakarta Sans', sans-serif;
     color: var(--text-dark);
 }
-:root {
-    --accent-color: #97DDE9;
-    --border-color: #333333;
-    --text-dark: #2c2c2c;
+
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--pink-accent) var(--bg-color);
 }
 
-/* Container Header & Banner */
+body {
+    background-color: var(--bg-color);
+    padding: 0 0 60px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    animation: pageFadeIn 1s ease both;
+    overflow-x: hidden; /* Mencegah layar geser kanan-kiri di HP */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ==========================================
+   TOP BANNER & NAVIGATION
+   ========================================== */
 .top-banner {
     width: 100%;
     background-color: var(--accent-color); 
@@ -33,9 +53,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 1;
 }
 
-/* Pola Kotak-kotak (Checkered Strip) di Atas */
 .checkered-strip {
     width: 100%;
     height: 30px;
@@ -51,11 +71,12 @@
     animation: stripDrift 18s linear infinite;
 }
 
-/* Styling Menu Navbar Ala Scrapbook */
 .scrapbook-nav {
     display: flex;
     gap: 15px;
-    padding: 12px 0;
+    padding: 12px 10px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .nav-pill {
@@ -93,56 +114,12 @@
     transition: transform .7s ease;
 }
 
-/* Responsif untuk Layar Kecil */
-@media (max-width: 768px) {
-    .scrapbook-nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 10px;
-    }
-}
-
-body {
-    background-color: var(--bg-color);
-    padding: 0 0 60px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    animation: pageFadeIn 1s ease both;
-}
-
-/* ==========================================
-   TOP BANNER & CHECKERED STRIP
-   ========================================== */
-.top-banner {
-    width: 100%;
-    height: 70px;
-    background-color: #e8a5b8; /* Background pink banner */
-    position: relative;
-    border-bottom: 2px solid var(--border-color);
-}
-
-.checkered-strip {
-    width: 100%;
-    height: 30px;
-    background-image: 
-        linear-gradient(45deg, #a3c98a 25%, transparent 25%), 
-        linear-gradient(-45deg, #a3c98a 25%, transparent 25%), 
-        linear-gradient(45deg, transparent 75%, #a3c98a 75%), 
-        linear-gradient(-45deg, transparent 75%, #a3c98a 75%);
-    background-size: 30px 30px;
-    background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
-    background-color: #ffffff;
-    border-bottom: 2px solid var(--border-color);
-}
-
 /* ==========================================
    PORTFOLIO CONTAINER
    ========================================== */
 .portfolio-container {
     max-width: 950px;
-    width: 90%;
+    width: 92%;
     background: var(--card-bg);
     border: 2px solid var(--border-color);
     border-radius: 16px;
@@ -151,6 +128,7 @@ body {
     box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.15);
     position: relative;
     isolation: isolate;
+    z-index: 1;
     animation: containerGlow 7s ease-in-out infinite;
 }
 
@@ -163,7 +141,6 @@ body {
     align-items: center;
 }
 
-/* Polaroid Photo Frame */
 .polaroid-wrapper {
     position: relative;
     animation: gentleFloat 4.5s ease-in-out infinite;
@@ -190,7 +167,10 @@ body {
     box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     transform: rotate(-3deg);
     width: 220px;
-    
+    position: relative;
+    z-index: 1; 
+    overflow: hidden;
+    transition: transform 0.45s cubic-bezier(.34,1.56,.64,1), box-shadow 0.35s ease;
 }
 
 .polaroid img {
@@ -200,7 +180,27 @@ body {
     border: 1px solid #ddd;
 }
 
-/* Intro Text */
+.polaroid::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.75) 50%, transparent 60%);
+    transform: translateX(-120%);
+    pointer-events: none;
+}
+
+.polaroid:hover::after {
+    transform: translateX(120%);
+    transition: transform .9s ease;
+}
+
+.polaroid:hover {
+    transform: scale(1.3) rotate(0deg);
+    box-shadow: 15px 15px 25px rgba(0,0,0,0.3);
+    z-index: 999;
+    cursor: zoom-in;
+}
+
 .header-intro {
     flex: 1;
     position: relative;
@@ -223,8 +223,8 @@ body {
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-size: 5rem;
-    line-height: 0.9;
-    margin-bottom: 5px;
+    line-height: 0.95;
+    margin-bottom: 8px;
     text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(224, 122, 147, 0.2);
     background: linear-gradient(100deg, var(--pink-accent) 30%, #f2b6c6 45%, #ffffff 50%, #f2b6c6 55%, var(--pink-accent) 70%);
     background-size: 300% 100%;
@@ -335,7 +335,6 @@ body {
     animation: underlineShimmer 4s linear infinite;
 }
 
-/* Education & Experience Items */
 .edu-item, .exp-item {
     margin-bottom: 20px;
 }
@@ -351,7 +350,6 @@ body {
     margin: 3px 0 8px 0;
 }
 
-/* Green Badge Tahun */
 .badge-green {
     display: inline-block;
     background-color: var(--green-badge);
@@ -363,12 +361,12 @@ body {
     box-shadow: 2px 2px 0px var(--border-color);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+
 .badge-green:hover {
     transform: translateY(-2px) scale(1.05);
     box-shadow: 3px 4px 0px var(--border-color);
 }
 
-/* Softwares Badges */
 .software-icons {
     display: flex;
     gap: 10px;
@@ -386,6 +384,7 @@ body {
     font-weight: 800;
     font-size: 0.85rem;
     box-shadow: 2px 2px 0px var(--border-color);
+    transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), box-shadow 0.25s ease;
 }
 
 .sw-badge.vs { background-color: #cce3de; }
@@ -393,15 +392,11 @@ body {
 .sw-badge.css { background-color: #e2ece9; }
 .sw-badge.Canva { background-color: #faedcd; }
 
-.sw-badge {
-    transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), box-shadow 0.25s ease;
-}
 .sw-badge:hover {
     transform: translateY(-5px) rotate(-6deg) scale(1.08);
     box-shadow: 4px 6px 0px var(--border-color);
 }
 
-/* Skills Outline Pills */
 .skills-pills {
     display: flex;
     flex-wrap: wrap;
@@ -440,7 +435,6 @@ body {
     transition: transform .75s ease;
 }
 
-/* Language Box */
 .lang-grid {
     display: flex;
     gap: 15px;
@@ -455,82 +449,82 @@ body {
 }
 
 /* ==========================================
-   RESPONSIVE DESIGN
+   EXPERIENCE PHOTO GALLERY
    ========================================== */
-@media (max-width: 768px) {
-    .header-section {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    .header-contacts {
-        justify-content: center;
-    }
-    .content-grid {
-        flex-direction: column;
-    }
-    .col-divider {
-        display: none;
-    }
-    .hello-badge {
-        left: 50%;
-        transform: translateX(-50%) rotate(0deg);
-        top: -25px;
-        animation: none;
-    }
+.exp-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 2px dashed #ccc;
 }
-/* Cari class .polaroid yang udah ada, lalu tambahin transition dan z-index */
-.polaroid {
-    background: white;
-    padding: 12px 12px 35px 12px;
-    border: 2px solid var(--border-color);
-    box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
-    transform: rotate(-3deg);
-    width: 220px;
-    
-    /* Tambahan baru: */
+
+.mini-polaroid {
     position: relative;
-    z-index: 1; 
-    overflow: hidden;
-    transition: transform 0.45s cubic-bezier(.34,1.56,.64,1), box-shadow 0.35s ease; /* Bikin pergerakannya mulus & sedikit elastis */
+    background: #fff;
+    padding: 6px 6px 20px 6px;
+    border: 1.5px solid var(--border-color);
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+    width: calc(33.333% - 10px);
+    min-width: 100px;
+    transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s ease;
+    z-index: 1;
+    animation: polaroidDrift 5s ease-in-out infinite;
 }
 
-/* Efek kilau (shine sweep) yang lewat saat photo di-hover */
-.polaroid::after {
-    content: "";
+.mini-polaroid img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    filter: saturate(0.85);
+    transition: filter 0.4s ease;
+}
+
+.mini-polaroid:hover img {
+    filter: saturate(1.15) brightness(1.03);
+}
+
+.washi-tape {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.75) 50%, transparent 60%);
-    transform: translateX(-120%);
-    pointer-events: none;
-}
-.polaroid:hover::after {
-    transform: translateX(120%);
-    transition: transform .9s ease;
+    top: -8px;
+    left: 50%;
+    width: 40px;
+    height: 15px;
+    background-color: var(--accent-color);
+    opacity: 0.8;
+    border: 1px dashed rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    animation: tapeFlutter 3.6s ease-in-out infinite;
 }
 
-/* Tambahin efek HOVER ini di bawahnya */
-.polaroid:hover {
-    transform: scale(1.4) rotate(0deg); /* Fotonya membesar 1.4x lipat dan posisinya jadi lurus */
-    box-shadow: 15px 15px 25px rgba(0,0,0,0.3); /* Bayangan makin tebal biar kelihatan melayang */
-    z-index: 999; /* Biar fotonya maju nutupin elemen lain (nggak ketindih) */
-    cursor: zoom-in; /* Ubah bentuk kursor jadi kaca pembesar */
+.mini-polaroid:nth-child(1) { --tilt: -4deg; transform: rotate(var(--tilt)); animation-delay: 0s; }
+.mini-polaroid:nth-child(2) { --tilt: 3deg; transform: rotate(var(--tilt)); margin-top: 10px; animation-delay: .6s; }
+.mini-polaroid:nth-child(3) { --tilt: -2deg; transform: rotate(var(--tilt)); animation-delay: 1.2s; }
+
+.mini-polaroid:hover {
+    transform: scale(1.3) rotate(0deg);
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    animation-play-state: paused;
 }
+
 /* ==========================================
    FOOTER STYLING
    ========================================== */
 .scrapbook-footer {
     width: 100%;
     margin-top: 50px;
-    background-color: var(--accent-color); /* Memakai warna #97DDE9 */
+    background-color: var(--accent-color);
     border-top: 2px solid var(--border-color);
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    z-index: 1;
 }
 
-/* Pola kotak-kotak untuk membatasi footer */
 .checkered-strip-footer {
     width: 100%;
     height: 25px;
@@ -549,7 +543,7 @@ body {
 .footer-content {
     padding: 30px 20px;
     width: 100%;
-    max-width: 800px;
+    max-width: 1000px;
 }
 
 .footer-title {
@@ -574,7 +568,6 @@ body {
     flex-wrap: wrap;
 }
 
-/* Memodifikasi tombol agar interaktif saat di-hover */
 .footer-links .pill-outline {
     text-decoration: none;
     color: var(--text-dark);
@@ -584,7 +577,7 @@ body {
 }
 
 .footer-links .pill-outline:hover {
-    background-color: #faedcd; /* Warna kuning pastel ala scrapbook */
+    background-color: #faedcd;
     transform: translateY(-4px);
     box-shadow: 4px 4px 0px var(--border-color);
 }
@@ -596,108 +589,10 @@ body {
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
-html {
-    scroll-behavior: smooth;
-}
-/* ==========================================
-   EXPERIENCE PHOTO GALLERY (AESTHETIC)
-   ========================================== */
-.exp-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-top: 25px;
-    padding-top: 15px;
-    border-top: 2px dashed #ccc; /* Garis batas tipis di atas foto */
-}
-
-/* Kertas Polaroid Mini */
-.mini-polaroid {
-    position: relative;
-    background: #fff;
-    padding: 6px 6px 20px 6px; /* Bawahnya lebih lebar ala polaroid */
-    border: 1.5px solid var(--border-color);
-    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
-    width: calc(33.333% - 10px); /* Dibagi 3 kolom biar rapi */
-    min-width: 100px;
-    transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s ease, z-index 0s;
-    z-index: 1;
-    animation-name: polaroidDrift;
-    animation-duration: 5s;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-}
-
-/* Atur ukuran fotonya biar kotak pas (Square) */
-.mini-polaroid img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border: 1px solid #ddd;
-    filter: saturate(0.85);
-    transition: filter 0.4s ease;
-}
-
-.mini-polaroid:hover img {
-    filter: saturate(1.15) brightness(1.03);
-}
-
-/* Selotip (Washi Tape) di atas foto */
-.washi-tape {
-    position: absolute;
-    top: -8px;
-    left: 50%;
-    width: 40px;
-    height: 15px;
-    background-color: var(--accent-color); /* Pake warna biru muda dari tema */
-    opacity: 0.8;
-    border: 1px dashed rgba(0, 0, 0, 0.3);
-    z-index: 2;
-    animation: tapeFlutter 3.6s ease-in-out infinite;
-}
-
-/* Bikin posisinya miring natural (berantakan estetik) + jadi basis animasi idle */
-.mini-polaroid:nth-child(1) { --tilt: -4deg; transform: rotate(var(--tilt)); animation-delay: 0s; }
-.mini-polaroid:nth-child(2) { --tilt: 3deg; transform: rotate(var(--tilt)); margin-top: 10px; animation-delay: .6s; }
-.mini-polaroid:nth-child(3) { --tilt: -2deg; transform: rotate(var(--tilt)); animation-delay: 1.2s; }
-
-/* Efek pas disentuh mouse: Membesar, maju ke depan, posisinya lurus */
-.mini-polaroid:hover {
-    transform: scale(1.3) rotate(0deg);
-    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.2);
-    z-index: 10;
-    animation-play-state: paused;
-}
 
 /* ==========================================
-   AESTHETIC ENHANCEMENTS — dekorasi & animasi
-   (Ditambahkan tanpa mengubah struktur HTML)
+   AMBIENT & DECORATION
    ========================================== */
-
-/* --- Selection & scrollbar kustom --- */
-::selection {
-    background-color: var(--pink-accent);
-    color: #ffffff;
-}
-
-html {
-    scrollbar-width: thin;
-    scrollbar-color: var(--pink-accent) var(--bg-color);
-}
-
-::-webkit-scrollbar {
-    width: 10px;
-}
-::-webkit-scrollbar-track {
-    background: var(--bg-color);
-}
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--pink-accent), var(--accent-color));
-    border-radius: 10px;
-    border: 2px solid var(--bg-color);
-}
-
-/* --- Ambient background: gumpalan lembut + tekstur kertas halus --- */
 body::before {
     content: "";
     position: fixed;
@@ -723,12 +618,6 @@ body::after {
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 
-.top-banner, .portfolio-container, .scrapbook-footer, main {
-    position: relative;
-    z-index: 1;
-}
-
-/* --- Ornamen bintang kecil di sudut portfolio-container --- */
 .portfolio-container::before,
 .portfolio-container::after {
     content: "✦";
@@ -739,89 +628,131 @@ body::after {
     pointer-events: none;
     animation: twinkle 3s ease-in-out infinite;
 }
-.portfolio-container::before {
-    top: 10px;
-    left: 14px;
-}
-.portfolio-container::after {
-    bottom: 10px;
-    right: 14px;
-    animation-delay: 1.4s;
-    color: var(--accent-color);
-}
+.portfolio-container::before { top: 10px; left: 14px; }
+.portfolio-container::after { bottom: 10px; right: 14px; animation-delay: 1.4s; color: var(--accent-color); }
 
 /* ==========================================
    KEYFRAMES
    ========================================== */
+@keyframes pageFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes containerGlow { 0%, 100% { box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.15); } 50% { box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.15), 0 0 34px rgba(224, 122, 147, 0.22); } }
+@keyframes titleShimmer { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes badgeFloat { 0%, 100% { transform: rotate(10deg) translateY(0); } 50% { transform: rotate(7deg) translateY(-4px); } }
+@keyframes gentleFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes clipWiggle { 0%, 100% { transform: rotate(-15deg); } 50% { transform: rotate(-9deg); } }
+@keyframes underlineShimmer { 0% { background-position: 0% 50%; } 100% { background-position: 220% 50%; } }
+@keyframes stripDrift { 0% { background-position: 0 0, 0 15px, 15px -15px, -15px 0px; } 100% { background-position: 60px 0, 60px 15px, 75px -15px, -45px 0px; } }
+@keyframes dividerTravel { 0% { left: -10%; } 50% { left: 80%; } 100% { left: -10%; } }
+@keyframes polaroidDrift { 0%, 100% { transform: rotate(var(--tilt)) translateY(0); } 50% { transform: rotate(var(--tilt)) translateY(-6px); } }
+@keyframes tapeFlutter { 0%, 100% { transform: translateX(-50%) rotate(-3deg); } 50% { transform: translateX(-50%) rotate(2deg); } }
+@keyframes blobDrift { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-1.5%, 1.5%) scale(1.05); } }
+@keyframes twinkle { 0%, 100% { opacity: 0.25; transform: scale(0.9) rotate(0deg); } 50% { opacity: 0.75; transform: scale(1.15) rotate(15deg); } }
 
-@keyframes pageFadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+/* ==========================================
+   RESPONSIVE DESIGN (PENYESUAIAN HP/MOBILE)
+   ========================================== */
+@media screen and (max-width: 768px) {
+    .portfolio-container {
+        width: 95%;
+        padding: 24px 16px;
+        margin-top: 15px;
+    }
+
+    /* Merapikan Header & Foto Utama */
+    .header-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 25px;
+    }
+
+    .polaroid {
+        width: 190px;
+    }
+
+    .polaroid img {
+        height: 200px;
+    }
+
+    /* Efek hover polaroid disesuaikan agar tidak meluap keluar layar HP */
+    .polaroid:hover {
+        transform: scale(1.1) rotate(0deg);
+    }
+
+    /* Mengubah ukuran Font "Hello" yang terlalu besar */
+    .hello-title {
+        font-size: 2.8rem;
+        line-height: 1;
+        margin-top: 10px;
+    }
+
+    .hello-badge {
+        position: relative;
+        top: 0;
+        left: 0;
+        display: inline-block;
+        margin-bottom: 5px;
+        transform: rotate(5deg);
+    }
+
+    .name-subtitle {
+        font-size: 1.25rem;
+    }
+
+    .header-contacts {
+        justify-content: center;
+    }
+
+    /* Mengubah Layout Konten menjadi 1 Kolom */
+    .content-grid {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .col-divider {
+        display: none;
+    }
+
+    /* Galeri Foto Pengalaman dibuat 2 Kolom di HP */
+    .exp-gallery {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .mini-polaroid {
+        width: calc(50% - 10px);
+        margin-top: 5px !important;
+    }
+
+    .mini-polaroid:hover {
+        transform: scale(1.15) rotate(0deg);
+    }
+
+    /* Menu Navigasi & Footer */
+    .scrapbook-nav {
+        gap: 8px;
+    }
+
+    .nav-pill {
+        padding: 5px 12px;
+        font-size: 0.8rem;
+    }
+
+    .footer-title {
+        font-size: 1.6rem;
+    }
 }
 
-@keyframes containerGlow {
-    0%, 100% { box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.15); }
-    50%      { box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.15), 0 0 34px rgba(224, 122, 147, 0.22); }
+/* Penyesuaian khusus untuk HP dengan layar sangat kecil (di bawah 400px) */
+@media screen and (max-width: 400px) {
+    .hello-title {
+        font-size: 2.2rem;
+    }
+    .mini-polaroid {
+        width: 100%;
+    }
 }
 
-@keyframes titleShimmer {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-@keyframes badgeFloat {
-    0%, 100% { transform: rotate(10deg) translateY(0); }
-    50%      { transform: rotate(7deg) translateY(-4px); }
-}
-
-@keyframes gentleFloat {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-8px); }
-}
-
-@keyframes clipWiggle {
-    0%, 100% { transform: rotate(-15deg); }
-    50%      { transform: rotate(-9deg); }
-}
-
-@keyframes underlineShimmer {
-    0%   { background-position: 0% 50%; }
-    100% { background-position: 220% 50%; }
-}
-
-@keyframes stripDrift {
-    0%   { background-position: 0 0, 0 15px, 15px -15px, -15px 0px; }
-    100% { background-position: 60px 0, 60px 15px, 75px -15px, -45px 0px; }
-}
-
-@keyframes dividerTravel {
-    0%   { left: -10%; }
-    50%  { left: 80%; }
-    100% { left: -10%; }
-}
-
-@keyframes polaroidDrift {
-    0%, 100% { transform: rotate(var(--tilt)) translateY(0); }
-    50%      { transform: rotate(var(--tilt)) translateY(-6px); }
-}
-
-@keyframes tapeFlutter {
-    0%, 100% { transform: translateX(-50%) rotate(-3deg); }
-    50%      { transform: translateX(-50%) rotate(2deg); }
-}
-
-@keyframes blobDrift {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50%      { transform: translate(-1.5%, 1.5%) scale(1.05); }
-}
-
-@keyframes twinkle {
-    0%, 100% { opacity: 0.25; transform: scale(0.9) rotate(0deg); }
-    50%      { opacity: 0.75; transform: scale(1.15) rotate(15deg); }
-}
-
-/* --- Hormati preferensi pengguna yang sensitif terhadap gerak --- */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.001ms !important;
